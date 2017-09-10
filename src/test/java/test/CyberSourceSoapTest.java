@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.xml.rpc.ServiceException;
 import org.apache.axis.AxisFault;
 import org.apache.ws.security.WSConstants;
@@ -19,24 +21,30 @@ public class CyberSourceSoapTest {
 
     private static final Logger log = LoggerFactory.getLogger(CyberSourceSoapTest.class);
 
-    //  Before using this example, replace the generic value with your merchant ID. 
-    private static final String MERCHANT_ID = "kr950210047";
-    private static final String LIB_VERSION = "1.4/1.5.12"; // Axis Version / WSS4J Version
+    private static ResourceBundle config;
+    private static String MERCHANT_ID;
+    private static String ENV;
+    private static String SERVER_URL;
 
-    // Remember to also change the TRANSACTION_KEY in SamplePWCallback.java
-    
-    private static final String SERVER_URL  = "https://ics2wstest.ic3.com/commerce/1.x/transactionProcessor";
+    private static final String LIB_VERSION = "1.4/1.5.12"; // Axis Version / WSS4J Version
 
     static {
         System.setProperty("axis.ClientConfigFile", "cybs.wsdd");
+
+        config      = ResourceBundle.getBundle("cybs", Locale.ENGLISH);
+        MERCHANT_ID = config.getString("merchant.id");
+        ENV         = config.getString("env");
+        SERVER_URL  = config.getString("env." + ENV + ".url");
     }
     
     @Test
     public void shoudAuth() throws Exception {
 
+        log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
+        log.debug("merchant Id     : {}", MERCHANT_ID);
+
         RequestMessage request = new RequestMessage();
-        
-        request.setMerchantID( MERCHANT_ID );
+        request.setMerchantID(MERCHANT_ID);
        
 	    // Before using this example, replace the generic value with
 		// your reference number for the current transaction. 
@@ -45,15 +53,15 @@ public class CyberSourceSoapTest {
         // To help us troubleshoot any problems that you may encounter,
         // please include the following information about your application.
         request.setClientLibrary( "Java Axis WSS4J" );
-        request.setClientLibraryVersion( LIB_VERSION );
+        request.setClientLibraryVersion(LIB_VERSION);
         request.setClientEnvironment(
                   System.getProperty( "os.name" ) + "/" +
                   System.getProperty( "os.version" ) + "/" +
                   System.getProperty( "java.vendor" ) + "/" +
                   System.getProperty( "java.version" ) );
     
-	   // This section contains a sample transaction request for the authorization 
-       // service with complete billing, payment card, and purchase (two items) information.	
+	    // This section contains a sample transaction request for the authorization 
+        // service with complete billing, payment card, and purchase (two items) information.	
 	    request.setCcAuthService( new CCAuthService() );
         request.getCcAuthService().setRun( "true" );
 
