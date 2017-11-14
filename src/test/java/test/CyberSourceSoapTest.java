@@ -13,7 +13,7 @@ import org.apache.ws.security.handler.WSHandlerConstants;
 import com.cybersource.stub.*;
 
 import org.junit.Test;
-
+import org.junit.Ignore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,7 @@ public class CyberSourceSoapTest {
     private static String ENV;
     private static String SERVER_URL;
 
-    private static final String LIB_VERSION = "1.4/1.5.12"; // Axis Version / WSS4J Version
+    private static final String LIB_VERSION = "1.4/1.5.12"; /* Axis Version/WSS4J Version */
 
     static {
         System.setProperty("axis.ClientConfigFile", "cybs.wsdd");
@@ -38,6 +38,7 @@ public class CyberSourceSoapTest {
     }
     
     @Test
+    @Ignore
     public void shoudAuth() throws Exception {
 
         log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
