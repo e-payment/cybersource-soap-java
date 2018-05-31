@@ -29,12 +29,20 @@ public class CyberSourceSoapTest {
     private static final String LIB_VERSION = "1.4/1.5.12"; // Axis Version / WSS4J Version
 
     static {
+
         System.setProperty("axis.ClientConfigFile", "cybs.wsdd");
 
         config      = ResourceBundle.getBundle("cybs", Locale.ENGLISH);
         MERCHANT_ID = config.getString("merchant.id");
         ENV         = config.getString("env");
         SERVER_URL  = config.getString("env." + ENV + ".url");
+
+        String proxyEnable = config.getString("proxy.enable");
+
+        if ("true".equalsIgnoreCase(proxyEnable)) {
+            System.setProperty("http.proxyHost", config.getString("proxy.host"));
+            System.setProperty("http.proxyPort", config.getString("proxy.port"));
+        }
     }
     
     @Test
@@ -48,7 +56,7 @@ public class CyberSourceSoapTest {
        
 	    // Before using this example, replace the generic value with
 		// your reference number for the current transaction. 
-	    request.setMerchantReferenceCode( "BAY" + new java.util.Date().getTime());
+	    request.setMerchantReferenceCode( "P" + new java.util.Date().getTime());
         
         // To help us troubleshoot any problems that you may encounter,
         // please include the following information about your application.
@@ -122,6 +130,4 @@ public class CyberSourceSoapTest {
             ex.printStackTrace();
         }
     }    
-    
-} 
-
+}
