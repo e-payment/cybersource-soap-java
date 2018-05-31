@@ -18,13 +18,13 @@ import com.cybersource.stub.TransactionProcessorLocator;
 
 import test.CyberSourceBaseTest;
 
-public class TokenPayment extends CyberSourceBaseTest {
+public class TokenPaymentTest extends CyberSourceBaseTest {
 
-	private static final Logger log = LoggerFactory.getLogger(TokenPayment.class);
+	private static final Logger log = LoggerFactory.getLogger(TokenPaymentTest.class);
 
 	@Test
 	// @Ignore
-	public void shoudCreateToken() throws Exception {
+	public void shoudPaymentTokenSuccess() throws Exception {
 
 		String subscriptionID = "5277582182786841003010"; // Reference to created subscriptionID
 
