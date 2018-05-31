@@ -46,7 +46,7 @@ public class CyberSourceSoapTest {
     }
     
     @Test
-    @Ignore
+    //@Ignore
     public void shoudAuth() throws Exception {
 
         log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);

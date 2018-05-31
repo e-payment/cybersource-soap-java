@@ -22,17 +22,19 @@ public class QueryTransactionTest {
 	private static final Logger logger = LoggerFactory.getLogger(QueryTransactionTest.class);
 
 	// for test system, use https://ebctest.cybersource.com/ebctest/Query
+	// for live system, use https://ebc.cybersource.com/ebc/Query
 	private static String server     = "https://ebctest.cybersource.com/ebctest/Query";
 	private static String merchantId = "kr950210047";
 	private static String username   = "itcybs";
-	private static String passwd     = "Password102";
+	private static String passwd     = "Password100";
 
 	@Test
+	@Ignore
 	public void shoudQuery() throws Exception {
 
 		// <requestID> is a 22 digit numeric ID corresponding to a transaction in the CyberSource system
 		String requestID = "5106476186716067204105";
-		GetTrxnRecord(requestID);
+		getTxnRecord(requestID);
 	}
 
 	/*
@@ -41,7 +43,7 @@ public class QueryTransactionTest {
 	 * The reply is in the form of an XML Transaction Detail Report record
 	 */
 
-	private static void GetTrxnRecord(String requestID) throws Exception {
+	private static void getTxnRecord(String requestID) throws Exception {
 
 		// add SSL provider to the java policy file
 		System.setProperty("java.protocol.handler.pkgs", "com.sun.net.ssl.internal.www.protocol");
@@ -105,5 +107,4 @@ public class QueryTransactionTest {
 
         return jsonPrettyPrintString;
     }
-
 }
