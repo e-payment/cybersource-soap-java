@@ -9,6 +9,7 @@ src/test/resources/cybs.properties
 # Eclipse files
 .classpath
 .project
+.settings
 
 # IntelliJ files
 .idea/

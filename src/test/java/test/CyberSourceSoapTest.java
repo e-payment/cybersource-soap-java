@@ -1,52 +1,31 @@
 package test;
 
 import java.math.BigInteger;
-import java.net.MalformedURLException;
-import java.rmi.RemoteException;
 import java.net.URL;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import javax.xml.rpc.ServiceException;
-import org.apache.axis.AxisFault;
-import org.apache.ws.security.WSConstants;
-import org.apache.ws.security.handler.WSHandlerConstants;
-import com.cybersource.stub.*;
 
-import org.junit.Test;
+import org.apache.ws.security.handler.WSHandlerConstants;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CyberSourceSoapTest {
+import com.cybersource.stub.BillTo;
+import com.cybersource.stub.CCAuthService;
+import com.cybersource.stub.CCCaptureService;
+import com.cybersource.stub.Card;
+import com.cybersource.stub.ITransactionProcessorStub;
+import com.cybersource.stub.Item;
+import com.cybersource.stub.PurchaseTotals;
+import com.cybersource.stub.ReplyMessage;
+import com.cybersource.stub.RequestMessage;
+import com.cybersource.stub.TransactionProcessorLocator;
+
+public class CyberSourceSoapTest extends CyberSourceBaseTest {
 
     private static final Logger log = LoggerFactory.getLogger(CyberSourceSoapTest.class);
-
-    private static ResourceBundle config;
-    private static String MERCHANT_ID;
-    private static String ENV;
-    private static String SERVER_URL;
-
-    private static final String LIB_VERSION = "1.4/1.5.12"; /* Axis Version/WSS4J Version */
-
-    static {
-
-        System.setProperty("axis.ClientConfigFile", "cybs.wsdd");
-
-        config      = ResourceBundle.getBundle("cybs", Locale.ENGLISH);
-        MERCHANT_ID = config.getString("merchant.id");
-        ENV         = config.getString("env");
-        SERVER_URL  = config.getString("env." + ENV + ".url");
-
-        String proxyEnable = config.getString("proxy.enable");
-
-        if ("true".equalsIgnoreCase(proxyEnable)) {
-            System.setProperty("http.proxyHost", config.getString("proxy.host"));
-            System.setProperty("http.proxyPort", config.getString("proxy.port"));
-        }
-    }
     
     @Test
-    //@Ignore
+    @Ignore
     public void shoudAuth() throws Exception {
 
         log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
@@ -63,16 +42,15 @@ public class CyberSourceSoapTest {
         // please include the following information about your application.
         request.setClientLibrary( "Java Axis WSS4J" );
         request.setClientLibraryVersion(LIB_VERSION);
-        request.setClientEnvironment(
-                  System.getProperty( "os.name" ) + "/" +
-                  System.getProperty( "os.version" ) + "/" +
-                  System.getProperty( "java.vendor" ) + "/" +
-                  System.getProperty( "java.version" ) );
+        request.setClientEnvironment(getEnvInformation());
     
 	    // This section contains a sample transaction request for the authorization 
         // service with complete billing, payment card, and purchase (two items) information.	
 	    request.setCcAuthService( new CCAuthService() );
         request.getCcAuthService().setRun( "true" );
+        
+        request.setCcCaptureService(new CCCaptureService() );
+        request.getCcCaptureService().setRun( "true" );
 
         BillTo billTo = new BillTo();
         billTo.setFirstName( "John" );
@@ -82,7 +60,7 @@ public class CyberSourceSoapTest {
         billTo.setState( "CA" );
         billTo.setPostalCode( "94043" );
         billTo.setCountry( "US" );
-        billTo.setEmail( "null@cybersource.com" );
+        billTo.setEmail( "customer@mail.com" );
         billTo.setIpAddress( "10.7.111.111" );
         request.setBillTo( billTo );
 
@@ -93,7 +71,7 @@ public class CyberSourceSoapTest {
         request.setCard( card );
 
         PurchaseTotals purchaseTotals = new PurchaseTotals();
-        purchaseTotals.setCurrency( "USD" );
+        purchaseTotals.setCurrency( "THB" );
         request.setPurchaseTotals( purchaseTotals );
 
         Item[] items = new Item[2];
@@ -101,7 +79,7 @@ public class CyberSourceSoapTest {
         Item item = new Item();
         item.setId( new BigInteger( "0" ) );
         item.setUnitPrice( "12.34" );
-        item.setQuantity( "2.0" );
+        item.setQuantity( "2" );
         items[0] = item;
 
         item = new Item();
@@ -129,6 +107,7 @@ public class CyberSourceSoapTest {
         }
         catch(Exception ex) {
             ex.printStackTrace();
+            log.error("ERROR: {}", ex.getMessage());
         }
-    }    
+    }
 }
