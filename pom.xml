@@ -64,6 +64,13 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20171018</version>
+		</dependency>
+
 		<!-- Logger -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
