@@ -50,6 +50,16 @@ Ahj/7wSTHhcKKWTImEjjQSzVk3btGThy5YMGDZoxYMWDNgxYqLyYT+z+AVF5MJ/Z/aQN/pP60MmkmWLr
 DEBUG [main] test.CyberSourceSoapTest.shoudAuth() - auth.reasonCode : 100
 ```
 
+
+### Payer Authen (3D-Secure) Testing
+
+```
+cd test-3ds-web
+mvn clean tomcat7:run
+```
+
+http://localhost:8088/
+
 ## For update API version
 
 ```
