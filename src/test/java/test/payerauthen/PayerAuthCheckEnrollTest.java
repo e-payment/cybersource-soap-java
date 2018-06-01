@@ -49,7 +49,7 @@ public class PayerAuthCheckEnrollTest extends CyberSourceBaseTest {
 
 		PurchaseTotals purchaseTotals = new PurchaseTotals();
 		purchaseTotals.setCurrency("THB");
-		purchaseTotals.setGrandTotalAmount("1234.50");
+		purchaseTotals.setGrandTotalAmount("1.00");
 		request.setPurchaseTotals(purchaseTotals);
 
 		Card card = new Card();
@@ -70,9 +70,9 @@ public class PayerAuthCheckEnrollTest extends CyberSourceBaseTest {
 			PayerAuthEnrollReply payerAuthEnrollReply = reply.getPayerAuthEnrollReply();
 
 			// To retrieve individual reply fields, follow these examples.
+			log.debug("requestID       : {}", reply.getRequestID());
 			log.debug("decision        : {}", reply.getDecision());
 			log.debug("reasonCode      : {}", reply.getReasonCode());
-			log.debug("requestID       : {}", reply.getRequestID());
 
 			// ReasonCode 475: The customer is enrolled in Payer Authentication.
 			// Authenticate the card holder before continuing with the transaction.
@@ -95,6 +95,20 @@ public class PayerAuthCheckEnrollTest extends CyberSourceBaseTest {
 				log.debug("xid      : {}", xid);
 				log.debug("termUrl  : {}", termUrl);
 				log.debug("ProofXML : \n{}", XmlUtil.format(payerAuthEnrollReply.getProofXML()));
+
+				StringBuilder html = new StringBuilder();
+				html.append("<body>\n");
+				html.append("	<form id='PAEnrollForm' name='PAEnrollForm' ");
+				html.append(" action='").append(acsUrl).append("' method='post' target='_self'>\n");
+				html.append("		<input type='hidden' name='PaReq' value='").append(paReq).append("' />\n");
+				html.append("		<input type='hidden' name='MD' value='").append(xid).append("' />\n");
+				html.append("		<input type='hidden' name='TermUrl' value='").append(termUrl).append("' />\n");
+				html.append("		<input type='submit' />\n");
+				html.append("	</form>\n");
+				html.append("</body>\n");
+
+				log.debug("HTML: \n{}", html);
+
 				// TODO: bypass 3DS
 				// } else if () {
 			} else {
