@@ -13,12 +13,19 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.XML;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 public class XmlUtil {
+
+	private static final Logger log = LoggerFactory.getLogger(XmlUtil.class);
 
 	public static String format(String unformattedXml) {
 
@@ -54,5 +61,21 @@ public class XmlUtil {
 			throw new RuntimeException(e);
 		}
 	}
-}
 
+	private static int PRETTY_PRINT_INDENT_FACTOR = 4;
+
+	public static String toJsonString(String strXml) {
+
+		String jsonPrettyPrintString = "";
+
+		try {
+			JSONObject xmlJSONObj = XML.toJSONObject(strXml);
+			jsonPrettyPrintString = xmlJSONObj.toString(PRETTY_PRINT_INDENT_FACTOR);
+			log.debug(jsonPrettyPrintString);
+		} catch (JSONException je) {
+			log.error(je.toString());
+		}
+
+		return jsonPrettyPrintString;
+	}
+}
