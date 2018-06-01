@@ -87,7 +87,7 @@ public class PayerAuthCheckEnrollTest extends CyberSourceBaseTest {
 				String acsUrl = payerAuthEnrollReply.getAcsURL();
 				String paReq = payerAuthEnrollReply.getPaReq();
 				String xid = payerAuthEnrollReply.getXid();
-				String termUrl = "http://127.0.0.1:8088/PayerACSResponse.php";
+				String termUrl = "http://localhost:8088/PayerACSResponse.jsp";
 
 				log.debug("payer.auth.reasonCode : {}", payerAuthEnrollReply.getReasonCode());
 				log.debug("acsUrl   : {}", acsUrl);
