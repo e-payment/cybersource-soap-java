@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.net.URL;
 
 import org.apache.ws.security.handler.WSHandlerConstants;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,7 @@ public class PayerAuthCheckEnrollTest extends CyberSourceBaseTest {
 	private static final Logger log = LoggerFactory.getLogger(PayerAuthCheckEnrollTest.class);
 
 	@Test
-	// @Ignore
+	@Ignore
 	public void shoudEnrolled() throws Exception {
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
