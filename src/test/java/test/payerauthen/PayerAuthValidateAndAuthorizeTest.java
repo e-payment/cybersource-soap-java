@@ -15,6 +15,7 @@ import com.cybersource.stub.CCCaptureService;
 import com.cybersource.stub.Card;
 import com.cybersource.stub.ITransactionProcessorStub;
 import com.cybersource.stub.InvoiceHeader;
+import com.cybersource.stub.PayerAuthValidateReply;
 import com.cybersource.stub.PayerAuthValidateService;
 import com.cybersource.stub.PurchaseTotals;
 import com.cybersource.stub.ReplyMessage;
@@ -32,7 +33,7 @@ public class PayerAuthValidateAndAuthorizeTest extends CyberSourceBaseTest {
 	public void shoudEnrollSuccess() throws Exception {
 
 		String merchantDescriptor = "BAY Payment"; // invoice_header_merchantDescriptor
-		
+
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
 		log.debug("merchant Id     : {}", MERCHANT_ID);
 
@@ -71,7 +72,7 @@ public class PayerAuthValidateAndAuthorizeTest extends CyberSourceBaseTest {
 
 		request.setCcCaptureService(new CCCaptureService());
 		request.getCcCaptureService().setRun("true");
-		
+
 		InvoiceHeader invoiceHeader = new InvoiceHeader();
 		invoiceHeader.setMerchantDescriptor(merchantDescriptor);
 		request.setInvoiceHeader(invoiceHeader);
@@ -104,10 +105,24 @@ public class PayerAuthValidateAndAuthorizeTest extends CyberSourceBaseTest {
 
 			ReplyMessage reply = stub.runTransaction(request);
 
+			PayerAuthValidateReply payerAuthValidateReply = reply.getPayerAuthValidateReply();
+
 			// To retrieve individual reply fields, follow these examples.
 			log.debug("requestID       : {}", reply.getRequestID());
 			log.debug("decision        : {}", reply.getDecision());
 			log.debug("reasonCode      : {}", reply.getReasonCode());
+			
+			log.debug("auth.ReasonCode : {}", payerAuthValidateReply.getReasonCode());
+			log.debug("XID             : {}", payerAuthValidateReply.getXid());
+			log.debug("PaRes Status    : {}", payerAuthValidateReply.getParesStatus());
+			log.debug("ECI             : {}", payerAuthValidateReply.getEci());
+			
+			// VISA/JCB
+			log.debug("CAVV            : {}", payerAuthValidateReply.getCavv());
+			
+			// MasterCard
+			log.debug("UcafAuth        : {}", payerAuthValidateReply.getUcafAuthenticationData());
+			log.debug("UcafCollection  : {}", payerAuthValidateReply.getUcafCollectionIndicator());
 
 			// TODO: check card can charge, then void transaction with requestID
 
