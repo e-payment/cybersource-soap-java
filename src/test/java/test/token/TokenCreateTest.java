@@ -63,7 +63,7 @@ public class TokenCreateTest extends CyberSourceBaseTest {
 
 		Card card = new Card();
 		card.setCardType("001"); // 001: VISA, 002: MC, 003: JCB
-		card.setAccountNumber("4111111111111111");
+		card.setAccountNumber("4000000000000002");
 		card.setExpirationMonth(new BigInteger("12"));
 		card.setExpirationYear(new BigInteger("2020"));
 		request.setCard(card);
