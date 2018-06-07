@@ -25,7 +25,7 @@ public class TokenUpdateTest extends CyberSourceBaseTest {
 	private static final Logger log = LoggerFactory.getLogger(TokenUpdateTest.class);
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void shoudUpdateTokenSuccess() throws Exception {
 
 		String subscriptionID = "5277582182786841003010"; // Reference to created subscriptionID

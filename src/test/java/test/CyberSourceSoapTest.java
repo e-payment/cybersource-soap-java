@@ -82,6 +82,7 @@ public class CyberSourceSoapTest extends CyberSourceBaseTest {
 
 		PurchaseTotals purchaseTotals = new PurchaseTotals();
 		purchaseTotals.setCurrency("THB");
+		//purchaseTotals.setGrandTotalAmount("1234.50");
 		request.setPurchaseTotals(purchaseTotals);
 
 		Item[] items = new Item[2];

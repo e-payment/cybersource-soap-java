@@ -32,7 +32,7 @@ public class PayerAuthValidateAndAuthorizeFullParamTest extends CyberSourceBaseT
 	private static final Logger log = LoggerFactory.getLogger(PayerAuthValidateAndAuthorizeFullParamTest.class);
 
 	@Test
-	// @Ignore
+	@Ignore
 	public void shoudSuccess() throws Exception {
 
 		String merchantDescriptor = "BAY Payment"; // invoice_header_merchantDescriptor
