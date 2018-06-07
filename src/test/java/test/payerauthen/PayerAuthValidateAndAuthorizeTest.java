@@ -96,6 +96,8 @@ public class PayerAuthValidateAndAuthorizeTest extends CyberSourceBaseTest {
 		billTo.setIpAddress("10.7.111.111");
 		request.setBillTo(billTo);
 		
+		
+		
 		request.setDeviceFingerprintID("7B45C607E8CF19F83CC6F2621591291A");
 
 		try {
