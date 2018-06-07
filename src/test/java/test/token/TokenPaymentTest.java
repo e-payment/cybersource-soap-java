@@ -29,7 +29,7 @@ public class TokenPaymentTest extends CyberSourceBaseTest {
 	public void shoudPaymentTokenSuccess() throws Exception {
 
 		String merchantDescriptor = "BAY Payment"; // invoice_header_merchantDescriptor
-		String subscriptionID = "5277582182786841003010"; // Reference to created subscriptionID
+		String subscriptionID = "5283676744016978203012"; // Reference to created subscriptionID
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
 		log.debug("merchant Id     : {}", MERCHANT_ID);
@@ -82,9 +82,9 @@ public class TokenPaymentTest extends CyberSourceBaseTest {
 			log.debug("decision        : {}", reply.getDecision());
 			log.debug("reasonCode      : {}", reply.getReasonCode());
 			log.debug("requestID       : {}", reply.getRequestID());
-			log.debug("auth.reasonCode : {}", reply.getCcAuthReply().getReasonCode());
 
 			if ("100".equals(reply.getReasonCode().toString())) {
+				log.debug("auth.reasonCode : {}", reply.getCcAuthReply().getReasonCode());
 				log.debug("TOKEN PAYMENT SUCCESS");
 			} else {
 				log.debug("TOKEN PAYMENT FAIL");

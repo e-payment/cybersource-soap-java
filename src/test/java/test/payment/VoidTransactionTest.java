@@ -30,7 +30,7 @@ public class VoidTransactionTest extends CyberSourceBaseTest {
 		RequestMessage request = new RequestMessage();
 		request.setMerchantID(MERCHANT_ID);
 		
-		String voidRequestID = "5278379505846874403009";
+		String voidRequestID = "5283682067206797703007";
 
 		// Before using this example, replace the generic value with
 		// your reference number for the current transaction.

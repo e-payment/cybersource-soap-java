@@ -28,7 +28,7 @@ public class TokenUpdateTest extends CyberSourceBaseTest {
 	@Ignore
 	public void shoudUpdateTokenSuccess() throws Exception {
 
-		String subscriptionID = "5277582182786841003010"; // Reference to created subscriptionID
+		String subscriptionID = "5283676744016978203012"; // Reference to created subscriptionID
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
 		log.debug("merchant Id     : {}", MERCHANT_ID);
@@ -48,8 +48,8 @@ public class TokenUpdateTest extends CyberSourceBaseTest {
 
 		Card card = new Card();
 		card.setCardType("001"); // 001: VISA, 002: MC, 003: JCB
-		card.setAccountNumber("4111111111111111");
-		card.setExpirationMonth(new BigInteger("09"));
+		card.setAccountNumber("4000000000000002");
+		card.setExpirationMonth(new BigInteger("05"));
 		card.setExpirationYear(new BigInteger("2021"));
 		request.setCard(card);
 

@@ -89,9 +89,9 @@ public class TokenCreateTest extends CyberSourceBaseTest {
 			log.debug("decision        : {}", reply.getDecision());
 			log.debug("reasonCode      : {}", reply.getReasonCode());
 			log.debug("requestID       : {}", reply.getRequestID());
-			log.debug("tokenId         : {}", reply.getPaySubscriptionCreateReply().getSubscriptionID());
 
 			if ("100".equals(reply.getReasonCode().toString())) {
+				log.debug("tokenId         : {}", reply.getPaySubscriptionCreateReply().getSubscriptionID());
 				log.debug("TOKEN CREATE SUCCESS");
 			} else {
 				log.debug("TOKEN CREATE FAIL");

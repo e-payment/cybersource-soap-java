@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.e-payment</groupId>
 	<artifactId>cybersource-soap-java</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1-SNAPSHOT</version> <!-- cybs 1.141 -->
 	<name>cybersource-soap-java</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

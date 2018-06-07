@@ -26,7 +26,7 @@ public class TokenRetrieveTest extends CyberSourceBaseTest {
 	@Ignore
 	public void shoudRetrievCustomerProfile() throws Exception {
 
-		String subscriptionID = "5282547059466593203529"; // Reference to created subscriptionID
+		String subscriptionID = "5283676744016978203012"; // Reference to created subscriptionID
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
 		log.debug("merchant Id     : {}", MERCHANT_ID);
