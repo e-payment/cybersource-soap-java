@@ -32,7 +32,7 @@ public class PayerAuthValidateAndAuthorizeFullParamTest extends CyberSourceBaseT
 	private static final Logger log = LoggerFactory.getLogger(PayerAuthValidateAndAuthorizeFullParamTest.class);
 
 	@Test
-	@Ignore
+	// @Ignore
 	public void shoudSuccess() throws Exception {
 
 		String merchantDescriptor = "BAY Payment"; // invoice_header_merchantDescriptor
@@ -131,7 +131,7 @@ public class PayerAuthValidateAndAuthorizeFullParamTest extends CyberSourceBaseT
 		payerAuthValidateService.setSignedPARes(signedPARes);
 		request.setPayerAuthValidateService(payerAuthValidateService);
 		
-		request.setDeviceFingerprintID("1uyytv45rxwaw35555ixwpyb");
+		request.setDeviceFingerprintID("7B45C607E8CF19F83CC6F2621591291A");
 
 		try {
 
