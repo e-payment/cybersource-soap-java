@@ -131,7 +131,7 @@ public class PayerAuthValidateAndAuthorizeFullParamTest extends CyberSourceBaseT
 		payerAuthValidateService.setSignedPARes(signedPARes);
 		request.setPayerAuthValidateService(payerAuthValidateService);
 		
-		request.setDeviceFingerprintID("7B45C607E8CF19F83CC6F2621591291A");
+		request.setDeviceFingerprintID("CF44E9A79E4AE5A34368DF589D2CC109");
 
 		try {
 

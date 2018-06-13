@@ -1,11 +1,10 @@
 package test;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
+import util.AppConfig;
 
 public abstract class CyberSourceBaseTest {
 
-	protected static ResourceBundle config;
+	protected static AppConfig config;
 	protected static String MERCHANT_ID;
 	protected static String ENV;
 	protected static String SERVER_URL;
@@ -15,8 +14,9 @@ public abstract class CyberSourceBaseTest {
 	static {
 
 		System.setProperty("axis.ClientConfigFile", "cybs.wsdd");
-
-		config = ResourceBundle.getBundle("cybs", Locale.ENGLISH);
+		
+		config = new AppConfig("cybs.properties");
+		
 		MERCHANT_ID = config.getString("merchant.id");
 		ENV = config.getString("env");
 		SERVER_URL = config.getString("env." + ENV + ".url");

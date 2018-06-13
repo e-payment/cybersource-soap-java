@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.net.URL;
 
 import org.apache.ws.security.handler.WSHandlerConstants;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class AuthorizeTest extends CyberSourceBaseTest {
 	private static final Logger log = LoggerFactory.getLogger(AuthorizeTest.class);
 
 	@Test
-	// @Ignore
+	@Ignore
 	public void shoudAuthSuccess() throws Exception {
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
@@ -66,14 +67,12 @@ public class AuthorizeTest extends CyberSourceBaseTest {
 		billTo.setFirstName("Test");
 		billTo.setLastName("Test");
 		billTo.setStreet1("123 testing street");
-		billTo.setStreet2("Main Avenue");
 		billTo.setCity("New York");
 		billTo.setState("NY");
-		billTo.setPostalCode("10001");
+		billTo.setPostalCode("1100");
 		billTo.setCountry("US");
 		billTo.setEmail("customer@mail.com");
 		billTo.setIpAddress("122.49.214.170");
-		billTo.setPhoneNumber("+6622962000");
 		request.setBillTo(billTo);
 
 		Card card = new Card();
