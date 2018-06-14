@@ -5,16 +5,15 @@ This is the Java client for the [CyberSource SOAP Toolkit API](http://www.cybers
 
 ## Prerequisites
 
-- Java SDK version 1.8 or above
+- Java SDK `version 1.8` (Only)
 - A CyberSource account. You can create an evaluation account [here](http://www.cybersource.com/register/).
-- A CyberSource transaction key. You will need to set your **merchant ID** and **transaction key** in the `cybs.properties`. Instructions on obtaining a transaction key can be found [here](http://apps.cybersource.com/library/documentation/dev_guides/SOAP_Toolkits/html/wwhelp/wwhimpl/js/html/wwhelp.htm#href=Intro.04.3.html).
+- A CyberSource transaction key. You will need to set your **merchant Id** and **transaction key** in the `cybs.properties`. Instructions on obtaining a transaction key can be found [here](http://apps.cybersource.com/library/documentation/dev_guides/SOAP_Toolkits/html/wwhelp/wwhimpl/js/html/wwhelp.htm#href=Intro.04.3.html).
 
 ## Configuration
 
 create file `cybs.properties` for setup configuration
-example for unit test
 
-`src/test/resouces/cybs.properties`
+example: `src/test/resouces/cybs.properties`
 ```
 merchant.id     = {merchant_id}
 transaction.key = {transaction_key}
