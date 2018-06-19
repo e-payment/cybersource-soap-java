@@ -11,6 +11,7 @@
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jetty.version>9.3.15.v20161220</jetty.version>
 	</properties>
 
     <build>
@@ -30,16 +31,45 @@
                 </configuration>
             </plugin>
 
-            <!-- Tomcat: mvn tomcat7:run -->
+            <!-- mvn jetty:run -->
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
                 <configuration>
-                    <path>/</path>
-					<server>tomcat-development-server</server>
-					<port>8088</port>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                    </webApp>
+                    <httpConnector>
+                        <!--host>localhost</host-->
+                        <port>8088</port>
+                    </httpConnector>
                 </configuration>
+            </plugin>
+
+            <!-- java -jar target/dependency/jetty-runner.jar target/*.war -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-runner</artifactId>
+                                    <version>${jetty.version}</version>
+                                    <destFileName>jetty-runner.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>

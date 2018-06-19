@@ -54,7 +54,7 @@ DEBUG [main] test.CyberSourceSoapTest.shoudAuth() - auth.reasonCode : 100
 
 ```
 cd test-3ds-web
-mvn clean tomcat7:run
+mvn clean jetty:run
 ```
 
 http://localhost:8088/
