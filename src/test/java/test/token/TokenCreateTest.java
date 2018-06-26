@@ -27,7 +27,7 @@ public class TokenCreateTest extends CyberSourceBaseTest {
 
 	@Test
 	@Ignore
-	public void shoudCreateToken() throws Exception {
+	public void shouldCreateToken() throws Exception {
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
 		log.debug("merchant Id     : {}", MERCHANT_ID);

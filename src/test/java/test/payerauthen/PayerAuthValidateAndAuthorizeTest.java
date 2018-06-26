@@ -30,7 +30,7 @@ public class PayerAuthValidateAndAuthorizeTest extends CyberSourceBaseTest {
 
 	@Test
 	@Ignore
-	public void shoudPayerAuthAndCaptureSuccess() throws Exception {
+	public void shouldPayerAuthAndCaptureSuccess() throws Exception {
 
 		String merchantDescriptor = "BAY Payment"; // invoice_header_merchantDescriptor
 

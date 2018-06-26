@@ -33,7 +33,7 @@ public class PayerAuthValidateAndAuthorizeFullParamTest extends CyberSourceBaseT
 
 	@Test
 	@Ignore
-	public void shoudSuccess() throws Exception {
+	public void shouldSuccess() throws Exception {
 
 		String merchantDescriptor = "BAY Payment"; // invoice_header_merchantDescriptor
 

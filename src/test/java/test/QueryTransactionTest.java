@@ -27,7 +27,7 @@ public class QueryTransactionTest extends CyberSourceBaseTest {
 
 	@Test
 	@Ignore
-	public void shoudQuery() throws Exception {
+	public void shouldQuery() throws Exception {
 
 		// <requestID> is a 22 digit numeric ID corresponding to a transaction in the
 		// CyberSource system

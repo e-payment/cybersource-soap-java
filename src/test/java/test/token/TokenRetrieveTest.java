@@ -24,7 +24,7 @@ public class TokenRetrieveTest extends CyberSourceBaseTest {
 
 	@Test
 	@Ignore
-	public void shoudRetrievCustomerProfile() throws Exception {
+	public void shouldRetrievCustomerProfile() throws Exception {
 
 		String subscriptionID = "5283676744016978203012"; // Reference to created subscriptionID
 

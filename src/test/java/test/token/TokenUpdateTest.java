@@ -26,7 +26,7 @@ public class TokenUpdateTest extends CyberSourceBaseTest {
 
 	@Test
 	@Ignore
-	public void shoudUpdateTokenSuccess() throws Exception {
+	public void shouldUpdateTokenSuccess() throws Exception {
 
 		String subscriptionID = "5283676744016978203012"; // Reference to created subscriptionID
 

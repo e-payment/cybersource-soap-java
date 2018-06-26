@@ -22,7 +22,7 @@ public class VoidTransactionTest extends CyberSourceBaseTest {
 
 	@Test
 	@Ignore
-	public void shoudVoidTransaction() throws Exception {
+	public void shouldVoidTransaction() throws Exception {
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
 		log.debug("merchant Id     : {}", MERCHANT_ID);

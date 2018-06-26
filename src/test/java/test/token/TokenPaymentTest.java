@@ -26,7 +26,7 @@ public class TokenPaymentTest extends CyberSourceBaseTest {
 
 	@Test
 	@Ignore
-	public void shoudPaymentTokenSuccess() throws Exception {
+	public void shouldPaymentTokenSuccess() throws Exception {
 
 		String merchantDescriptor = "BAY Payment"; // invoice_header_merchantDescriptor
 		String subscriptionID = "5283676744016978203012"; // Reference to created subscriptionID

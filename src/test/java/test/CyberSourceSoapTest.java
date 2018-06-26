@@ -26,7 +26,7 @@ public class CyberSourceSoapTest extends CyberSourceBaseTest {
 
 	@Test
 	// @Ignore
-	public void shoudAuth() throws Exception {
+	public void shouldAuth() throws Exception {
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
 		log.debug("merchant Id     : {}", MERCHANT_ID);

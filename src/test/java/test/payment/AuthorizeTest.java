@@ -28,7 +28,7 @@ public class AuthorizeTest extends CyberSourceBaseTest {
 
 	@Test
 	@Ignore
-	public void shoudAuthSuccess() throws Exception {
+	public void shouldAuthSuccess() throws Exception {
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
 		log.debug("merchant Id     : {}", MERCHANT_ID);

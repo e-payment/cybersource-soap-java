@@ -27,7 +27,7 @@ public class PayerAuthCheckEnrollTest extends CyberSourceBaseTest {
 
 	@Test
 	@Ignore
-	public void shoudEnrolled() throws Exception {
+	public void shouldEnrolled() throws Exception {
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
 		log.debug("merchant Id     : {}", MERCHANT_ID);
