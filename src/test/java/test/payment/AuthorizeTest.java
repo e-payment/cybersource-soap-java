@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.cybersource.stub.BillTo;
 import com.cybersource.stub.CCAuthService;
+import com.cybersource.stub.CCCaptureService;
 import com.cybersource.stub.Card;
 import com.cybersource.stub.ITransactionProcessorStub;
 import com.cybersource.stub.InvoiceHeader;
@@ -42,7 +43,8 @@ public class AuthorizeTest extends CyberSourceBaseTest {
 		// your reference number for the current transaction.
 		request.setMerchantReferenceCode("P" + new java.util.Date().getTime());
 		String reconciliationID = request.getMerchantReferenceCode(); // for TC33 Report
-
+		log.debug("referenceCode   : {}", request.getMerchantReferenceCode());
+		
 		// To help us troubleshoot any problems that you may encounter,
 		// please include the following information about your application.
 		request.setClientLibrary("Java Axis WSS4J");
@@ -54,12 +56,19 @@ public class AuthorizeTest extends CyberSourceBaseTest {
 		CCAuthService ccAuthService = new CCAuthService();
 		ccAuthService.setRun("true");
 		ccAuthService.setReconciliationID(reconciliationID);
+		
+		// F1 (11)
+		ccAuthService.setAggregatorID("90123456789");
 		request.setCcAuthService(ccAuthService);
 
-		//request.setCcCaptureService(new CCCaptureService());
-		//request.getCcCaptureService().setRun("true");
+//		request.setCcCaptureService(new CCCaptureService());
+//		request.getCcCaptureService().setRun("true");
 
 		InvoiceHeader invoiceHeader = new InvoiceHeader();
+		// F2 (11)
+		invoiceHeader.setSalesOrganizationID(new BigInteger("90123456789"));
+		// F3 (15)
+		invoiceHeader.setSubmerchantID(MERCHANT_ID);
 		invoiceHeader.setMerchantDescriptor(merchantDescriptor);
 		request.setInvoiceHeader(invoiceHeader);
 
@@ -69,22 +78,29 @@ public class AuthorizeTest extends CyberSourceBaseTest {
 		billTo.setStreet1("123 testing street");
 		billTo.setCity("New York");
 		billTo.setState("NY");
-		billTo.setPostalCode("1100");
-		billTo.setCountry("US");
+		billTo.setPostalCode("10120");
+		billTo.setCountry("TH");
 		billTo.setEmail("customer@mail.com");
-		billTo.setIpAddress("122.49.214.170");
+		billTo.setIpAddress("192.168.1.1");
 		request.setBillTo(billTo);
 
 		Card card = new Card();
-		card.setCardType("001"); // 001: VISA, 002: MC, 003: JCB
+		
+		// VISA
+		card.setCardType("001");
 		card.setAccountNumber("4000000000000002");
+		
+		// MASTERCARD
+		// card.setCardType("002");
+		// card.setAccountNumber("5555555555554444");
+		
 		card.setExpirationMonth(new BigInteger("12"));
 		card.setExpirationYear(new BigInteger("2020"));
 		request.setCard(card);
 
 		PurchaseTotals purchaseTotals = new PurchaseTotals();
 		purchaseTotals.setCurrency("THB");
-		purchaseTotals.setGrandTotalAmount("92.00");
+		purchaseTotals.setGrandTotalAmount("1.00");
 		request.setPurchaseTotals(purchaseTotals);
 
 		// MDD
