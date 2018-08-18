@@ -4,7 +4,7 @@
 
 target/
 log/
-src/test/resources/cybs.properties
+src/test/resources/*.properties
 
 # Eclipse files
 .classpath
