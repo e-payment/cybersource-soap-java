@@ -66,6 +66,7 @@ public class TokenCreateTest extends CyberSourceBaseTest {
 		card.setAccountNumber("4000000000000002");
 		card.setExpirationMonth(new BigInteger("12"));
 		card.setExpirationYear(new BigInteger("2020"));
+		card.setCvNumber("111");
 		request.setCard(card);
 
 		RecurringSubscriptionInfo recurringSubscriptionInfo = new RecurringSubscriptionInfo();
