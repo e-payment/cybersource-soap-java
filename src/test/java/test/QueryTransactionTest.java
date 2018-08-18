@@ -1,38 +1,64 @@
 package test;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.security.Security;
+import java.io.DataOutputStream;
 import java.util.Base64;
 
-import org.junit.Ignore;
+import javax.net.ssl.HttpsURLConnection;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import util.XmlUtil;
+import util.AppConfig;
+import util.HttpUtils;
 
 public class QueryTransactionTest extends CyberSourceBaseTest {
 
 	private static final Logger log = LoggerFactory.getLogger(QueryTransactionTest.class);
 
-	// for test system, use https://ebctest.cybersource.com/ebctest/Query
-	// for live system, use https://ebc.cybersource.com/ebc/Query
-	private static String server = "https://ebctest.cybersource.com/ebctest/Query";
-	private static String username = "itcybs";
-	private static String passwd = "Password100";
+	private static AppConfig config;
+	private static String MERCHANT_ID;
+	private static String ENVIRONMENT;
+	private static String REPORT_URL;
+
+	private void setup() {
+
+		config = new AppConfig("cybs.properties");
+
+		MERCHANT_ID = config.getString("merchant.id");
+		ENVIRONMENT = config.getString("env");
+		REPORT_URL = config.getString("report." + ENVIRONMENT + ".url");
+
+		String proxyEnable = config.getString("proxy.enable");
+		log.debug("proxyEnable: {}", proxyEnable);
+
+		if ("true".equalsIgnoreCase(proxyEnable)) {
+			HttpUtils.setupProxy(config.getString("proxy.host"), config.getInt("proxy.port"));
+		}
+
+		HttpUtils.debugSSL(false, "ssl:handsahake");
+	}
 
 	@Test
 	@Ignore
-	public void shouldQuery() throws Exception {
+	public void shouldQueryByRequestId() throws Exception {
+
+		setup();
+		
+		log.debug("Environment: {} => {}", ENVIRONMENT, getEnvInformation());
+		log.debug(" Report URL: {} => {}", REPORT_URL);
 
 		// <requestID> is a 22 digit numeric ID corresponding to a transaction in the
 		// CyberSource system
 		String requestID = "5106476186716067204105";
-		getTxnRecord(requestID);
+
+		try {
+
+			getTxnRecord(requestID);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			log.error("ERROR: {}", ex.getMessage());
+		}
 	}
 
 	/*
@@ -43,46 +69,60 @@ public class QueryTransactionTest extends CyberSourceBaseTest {
 
 	private static void getTxnRecord(String requestID) throws Exception {
 
-		// add SSL provider to the java policy file
-		System.setProperty("java.protocol.handler.pkgs", "com.sun.net.ssl.internal.www.protocol");
-		Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+		String rp_username = "itcybs";
+		String rp_password = "Password100";
 
 		// Construct post data
-		String data = "merchantID=" + MERCHANT_ID;
-		data += "&type=transaction";
-		data += "&subtype=transactionDetail";
-		data += "&requestID=" + requestID;
+		StringBuffer postData = new StringBuffer();
+		postData.append("merchantID=").append(MERCHANT_ID);
+		postData.append("&type=transaction");
+		postData.append("&subtype=transactionDetail");
+		postData.append("&requestID=").append(requestID);
 
-		// Encode login info
-		String credential = username + ":" + passwd;
-		String encodeAuth = Base64.getEncoder().encodeToString(credential.getBytes());
+		byte[] postDataByte = postData.toString().getBytes("UTF-8");
+		int postDataLength = postDataByte.length;
 
 		// Send post data
-		URL url = new URL(server);
-		URLConnection conn = url.openConnection();
+		HttpsURLConnection conn = (HttpsURLConnection) HttpUtils.getConnection(REPORT_URL);
+
+		// Encode login info
+		String userCredentials = rp_username + ":" + rp_password;
+		String basicAuth = "Basic " + Base64.getEncoder().encodeToString(userCredentials.getBytes());
+
+		// curl command
+		if (log.isDebugEnabled()) {
+			StringBuilder curlCmd = new StringBuilder();
+			curlCmd.append("curl -kv -POST");
+			curlCmd.append(" -x ").append(config.getString("proxy.host")).append(":").append(config.getInt("proxy.port"));
+			curlCmd.append(" --url ").append(REPORT_URL);
+			curlCmd.append(" --header \"Authorization: ").append(basicAuth).append("\"");
+			curlCmd.append(" -d \"merchantID=").append(MERCHANT_ID);
+			curlCmd.append(" -d \"type=transaction");
+			curlCmd.append(" -d \"subtype=transactionDetail");
+			curlCmd.append(" -d \"requestID=").append(requestID);
+			log.debug("\n{}\n", curlCmd);
+		}
+		
+		log.debug("> {}", basicAuth);
+
+		conn.setRequestMethod("POST");
+		conn.setRequestProperty("Authorization", basicAuth);
+		conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		conn.setRequestProperty("Content-Length", "" + postDataLength);
+		conn.setUseCaches(false);
+		conn.setDoInput(true);
 		conn.setDoOutput(true);
 
-		// Handle basic authentication
-		conn.setRequestProperty("Authorization", "Basic " + encodeAuth);
-		OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-		wr.write(data);
-		wr.flush();
-
-		// Get the response
-		BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		StringBuffer result = new StringBuffer();
-		int c;
-
-		while ((c = rd.read()) != -1) {
-			result.append((char) c);
+		try {
+			DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+			wr.write(postDataByte);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			log.error("ERROR: {}", ex.getMessage());
 		}
 
-		String xmlString = result.toString();
+		int responseCode = conn.getResponseCode();
+		log.debug(" HTTP STATUS: {} {}", responseCode, conn.getResponseMessage());
 
-		log.debug(xmlString);
-		log.debug(XmlUtil.toJsonString(xmlString));
-
-		wr.close();
-		rd.close();
 	}
 }

@@ -22,6 +22,9 @@ env             = test
 env.test.url    = https://ics2wstest.ic3.com/commerce/1.x/transactionProcessor
 env.live.url    = https://ics2ws.ic3.com/commerce/1.x/transactionProcessor
 
+report.test.url = https://ebctest.cybersource.com/ebctest/Query
+report.live.url = https://ebc.cybersource.com/ebc/Query
+
 proxy.enable    = false
 proxy.host      = localhost
 proxy.port      = 3128
