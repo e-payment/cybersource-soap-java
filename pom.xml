@@ -195,7 +195,6 @@
 			<id>cxf</id>
 
 			<properties>
-				<java.version>1.8</java.version>
 				<cxf.version>3.3.2</cxf.version>
 			</properties>
 
@@ -220,6 +219,13 @@
 					<artifactId>cxf-rt-transports-http</artifactId>
 					<version>${cxf.version}</version>
 				</dependency>
+
+				<dependency>
+					<groupId>org.apache.cxf.xjc-utils</groupId>
+					<artifactId>cxf-xjc-runtime</artifactId>
+					<version>3.3.0</version>
+				</dependency>
+
 			</dependencies>
 
 			<build>
@@ -240,17 +246,18 @@
 						<artifactId>cxf-codegen-plugin</artifactId>
 						<version>${cxf.version}</version>
 						<executions>
+						
 							<execution>
-								<id>test-service</id>
+								<id>cybersource-service</id>
 								<phase>generate-sources</phase>
 								<configuration>
 									<sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
 									<wsdlOptions>
 										<wsdlOption>
-											<wsdl>${basedir}/src/main/resources/wsdl/test.wsdl</wsdl>
-											<serviceName>Test_Operation_Manager</serviceName>
+											<wsdl>${basedir}/src/main/resources/wsdl/cybersource.wsdl</wsdl>
+											<serviceName>TransactionProcessor</serviceName>
 											<bindingFiles>
-												<bindingFile>${basedir}/src/main/resources/wsdl/test_binding.xml</bindingFile>
+												<bindingFile>${basedir}/src/main/resources/wsdl/cybersource_binding.xml</bindingFile>
 											</bindingFiles>
 											<extraargs>
 												<extraarg>-xjc-Xts</extraarg>
@@ -258,21 +265,17 @@
 										</wsdlOption>
 									</wsdlOptions>
 								</configuration>
-								<goals>
+								<goals> 
 									<goal>wsdl2java</goal>
 								</goals>
 							</execution>
 						</executions>
+
 						<dependencies>
 							<dependency>
-								<groupId>xerces</groupId>
-								<artifactId>xercesImpl</artifactId>
-								<version>2.12.0</version>
-							</dependency>
-							<dependency>
-								<groupId>org.apache.cxf</groupId>
+								<groupId>org.apache.cxf.xjcplugins</groupId>
 								<artifactId>cxf-xjc-ts</artifactId>
-								<version>${cxf.version}</version>
+								<version>3.3.0</version>
 							</dependency>
 						</dependencies>
 					</plugin>
