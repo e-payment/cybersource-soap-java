@@ -28,8 +28,8 @@ public class TokenPaymentTest extends CyberSourceBaseTest {
 	@Ignore
 	public void shouldPaymentTokenSuccess() throws Exception {
 
-		String merchantDescriptor = "BAY Payment"; // invoice_header_merchantDescriptor
-		String subscriptionID = "5283676744016978203012"; // Reference to created subscriptionID
+		String merchantDescriptor = "BLUEPAY.CO.TH"; // invoice_header_merchantDescriptor
+		String subscriptionID = "5319790931746334603007"; // Reference to created subscriptionID
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
 		log.debug("merchant Id     : {}", MERCHANT_ID);
@@ -39,7 +39,7 @@ public class TokenPaymentTest extends CyberSourceBaseTest {
 
 		// Before using this example, replace the generic value with
 		// your reference number for the current transaction.
-		request.setMerchantReferenceCode("T" + new java.util.Date().getTime());
+		request.setMerchantReferenceCode("P" + new java.util.Date().getTime());
 		String reconciliationID = request.getMerchantReferenceCode(); // TODO: for reconcile report
 
 		// To help us troubleshoot any problems that you may encounter,
@@ -84,6 +84,7 @@ public class TokenPaymentTest extends CyberSourceBaseTest {
 			log.debug("requestID       : {}", reply.getRequestID());
 
 			if ("100".equals(reply.getReasonCode().toString())) {
+				log.debug("referenceNumber : {}", reply.getMerchantReferenceCode());
 				log.debug("auth.reasonCode : {}", reply.getCcAuthReply().getReasonCode());
 				log.debug("TOKEN PAYMENT SUCCESS");
 			} else {

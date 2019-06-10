@@ -4,6 +4,7 @@ import java.net.URL;
 
 import org.apache.ws.security.handler.WSHandlerConstants;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +22,7 @@ public class AuthReversalTest extends CyberSourceBaseTest {
 	private static final Logger log = LoggerFactory.getLogger(AuthReversalTest.class);
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void shouldVoidTransaction() throws Exception {
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);

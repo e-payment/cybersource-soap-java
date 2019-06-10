@@ -41,7 +41,7 @@ public class AuthorizeTest extends CyberSourceBaseTest {
 
 		// Before using this example, replace the generic value with
 		// your reference number for the current transaction.
-		request.setMerchantReferenceCode("P" + new java.util.Date().getTime());
+		request.setMerchantReferenceCode("A" + new java.util.Date().getTime());
 		String reconciliationID = request.getMerchantReferenceCode(); // for TC33 Report
 		log.debug("referenceCode   : {}", request.getMerchantReferenceCode());
 		
@@ -96,6 +96,7 @@ public class AuthorizeTest extends CyberSourceBaseTest {
 		
 		card.setExpirationMonth(new BigInteger("12"));
 		card.setExpirationYear(new BigInteger("2020"));
+		card.setCvNumber("111");
 		request.setCard(card);
 
 		PurchaseTotals purchaseTotals = new PurchaseTotals();
