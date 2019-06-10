@@ -26,6 +26,7 @@ public class CxfTest extends CxfBaseTest {
 
 	@Test
 	public void test() {
+		
 		assertEquals("CXF", "CXF");
 
 		log.debug("*** ENVIRONMENT : {} => {}", ENV, SERVER_URL);
