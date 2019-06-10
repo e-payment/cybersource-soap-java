@@ -105,7 +105,8 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-<!-- 		<dependency>
+<!--
+ 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jul-to-slf4j</artifactId>
 			<version>${slf4j.version}</version>
@@ -114,7 +115,8 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>log4j-over-slf4j</artifactId>
 			<version>${slf4j.version}</version>
-		</dependency> -->
+		</dependency>
+-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -122,6 +124,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -137,7 +140,7 @@
 					</compilerArgs>
 				</configuration>
 			</plugin>
-			<!--
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>axistools-maven-plugin</artifactId>
@@ -152,7 +155,7 @@
 						<configuration>
 							<sourceDirectory>src/main/resources/wsdl</sourceDirectory>
 							<wsdlFiles>
-								<wsdlFile>CyberSourceTransaction.wsdl</wsdlFile>
+								<wsdlFile>CyberSourceTransaction_1.155.wsdl</wsdlFile>
 							</wsdlFiles>
 							<outputDirectory>src/main/java</outputDirectory>
 							<packageSpace>com.cybersource.stub</packageSpace>
@@ -163,7 +166,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			-->
+
 			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -191,6 +194,7 @@
 	</build>
 
 	<profiles>
+
 		<profile>
 			<id>cxf</id>
 
@@ -245,8 +249,16 @@
 						<groupId>org.apache.cxf</groupId>
 						<artifactId>cxf-codegen-plugin</artifactId>
 						<version>${cxf.version}</version>
+
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.cxf.xjcplugins</groupId>
+								<artifactId>cxf-xjc-ts</artifactId>
+								<version>3.3.0</version>
+							</dependency>
+						</dependencies>
+
 						<executions>
-						
 							<execution>
 								<id>cybersource-service</id>
 								<phase>generate-sources</phase>
@@ -254,7 +266,7 @@
 									<sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
 									<wsdlOptions>
 										<wsdlOption>
-											<wsdl>${basedir}/src/main/resources/wsdl/cybersource.wsdl</wsdl>
+											<wsdl>${basedir}/src/main/resources/wsdl/CyberSourceTransaction.wsdl</wsdl>
 											<serviceName>TransactionProcessor</serviceName>
 											<bindingFiles>
 												<bindingFile>${basedir}/src/main/resources/wsdl/cybersource_binding.xml</bindingFile>
@@ -270,17 +282,8 @@
 								</goals>
 							</execution>
 						</executions>
-
-						<dependencies>
-							<dependency>
-								<groupId>org.apache.cxf.xjcplugins</groupId>
-								<artifactId>cxf-xjc-ts</artifactId>
-								<version>3.3.0</version>
-							</dependency>
-						</dependencies>
 					</plugin>
 				</plugins>
-
 			</build>
 	    </profile>
 	</profiles>

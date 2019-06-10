@@ -67,9 +67,15 @@ http://localhost:8088/
 ```
 cd src/main/resources/wsdl
 
-wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.142.wsdl CyberSourceTransaction.wsdl
-wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.142.xsd
+wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.155.wsdl CyberSourceTransaction.wsdl
+wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.155.xsd
 
 cd /project/directory
 mvn clean axistools:wsdl2java
 ```
+
+## TODO
+- [ ] Migrate axis to cxf, axis2 or jax-ws
+    - [Difference between JAX-WS, Axis2 and CXF](https://stackoverflow.com/questions/11566609/difference-between-jax-ws-axis2-and-cxf/11567163)
+    - [Apache Axis2, CXF and Sun JAX-WS RI in comparison](https://www.predic8.com/axis2-cxf-jax-ws-comparison.htm)
+- [ ] xxx
