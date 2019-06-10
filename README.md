@@ -67,8 +67,9 @@ http://localhost:8088/
 ```
 cd src/main/resources/wsdl
 
-wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.155.wsdl CyberSourceTransaction.wsdl
-wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.155.xsd
+wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.141.xsd
+wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.141.wsdl
+mv CyberSourceTransaction_1.141.wsdl CyberSourceTransaction.wsdl
 
 cd /project/directory
 mvn clean axistools:wsdl2java
