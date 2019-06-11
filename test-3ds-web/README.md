@@ -29,4 +29,3 @@ String df_param    = "org_id=" + DF_ORG_ID + "&amp;session_id=" + MERCHANT_ID + 
 </div>
 <!-- DF END -->
 ```
-
