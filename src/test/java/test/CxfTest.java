@@ -96,7 +96,7 @@ public class CxfTest extends CxfBaseTest {
 		item.setId(new BigInteger("1"));
 		item.setUnitPrice("56.78");
 		items[1] = item;
-		//request.setItem(items);
+		// request.setItem(items);
 
 		request.setDeviceFingerprintID("7B45C607E8CF19F83CC6F2621591291A");
 		

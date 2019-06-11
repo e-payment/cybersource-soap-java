@@ -52,31 +52,35 @@ Ahj/7wSTHhcKKWTImEjjQSzVk3btGThy5YMGDZoxYMWDNgxYqLyYT+z+AVF5MJ/Z/aQN/pP60MmkmWLr
 DEBUG [main] test.CyberSourceSoapTest.shoudAuth() - auth.reasonCode : 100
 ```
 
-
 ### Payer Authen (3D-Secure) Testing
 
 ```
 cd test-3ds-web
-mvn clean jetty:run
+mvn jetty:run
 ```
 
 http://localhost:8088/
 
-## For update API version
 
+## For update version
+
+	cd src/main/resources/wsdl
+
+	wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.141.xsd
+	wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.141.wsdl
+
+	cd /project/directory
+
+Update project version at `pom.xml`
+
+```xml
+<modelVersion>4.0.0</modelVersion>
+<groupId>io.github.e-payment</groupId>
+<artifactId>cybersource-soap-java</artifactId>
+<version>1.141</version> <!-- cybs 1.141 -->
+<name>cybersource-soap-java</name>
 ```
-cd src/main/resources/wsdl
 
-wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.141.xsd
-wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.141.wsdl
-mv CyberSourceTransaction_1.141.wsdl CyberSourceTransaction.wsdl
+Then run
 
-cd /project/directory
-mvn clean axistools:wsdl2java
-```
-
-## TODO
-- [ ] Migrate axis to cxf, axis2 or jax-ws
-    - [Difference between JAX-WS, Axis2 and CXF](https://stackoverflow.com/questions/11566609/difference-between-jax-ws-axis2-and-cxf/11567163)
-    - [Apache Axis2, CXF and Sun JAX-WS RI in comparison](https://www.predic8.com/axis2-cxf-jax-ws-comparison.htm)
-- [ ] xxx
+	mvn clean axistools:wsdl2java
