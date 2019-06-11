@@ -65,10 +65,11 @@ http://localhost:8088/
 ## For update API version
 
 ```
+rm -rf src/main/java/com/cybersource/stub
 cd src/main/resources/wsdl
 
-wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.142.wsdl CyberSourceTransaction.wsdl
-wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.142.xsd
+wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.141.xsd
+wget https://ics2wstesta.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.141.wsdl
 
 cd /project/directory
 mvn clean axistools:wsdl2java
